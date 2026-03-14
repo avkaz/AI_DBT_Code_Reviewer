@@ -33,7 +33,6 @@
 - The repository includes `.github/workflows/dbt_review.yml` to run a pipeline when a PR is created.
 - Pipeline checks whether any SQL files changed under `models/` and runs the same review flow.
 - If checks fail, the PR shows failure status and a link for details (user can click to see failure reasons).
-- This is tested and working; images below show the UI and failed check trace.
 
 ## Run locally
 
