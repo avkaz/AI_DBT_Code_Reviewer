@@ -1,0 +1,29 @@
+Review this dbt SQL model for semantic issues.
+
+{% if context %}
+Model context:
+{{ context | tojson(indent=2) }}
+
+Apply rules based on model type:
+- staging: no aggregations, no business logic, 1:1 with source
+- intermediate: transformations allowed, no final metrics
+- mart: must have clear grain, aggregations expected
+{% endif %}
+
+Focus ONLY on issues static analysis cannot catch:
+- wrong or ambiguous aggregation grain
+- joins that may cause row duplication (fan-out)
+- missing GROUP BY given the selected columns
+- business logic that contradicts the model type above
+- column naming that is misleading or unclear
+
+Do NOT report on:
+- SELECT * (already checked)
+- hardcoded schema references (already checked)
+- number of joins (already checked)
+- hardcoded dates (already checked)
+
+SQL:
+{{ sql }}
+
+Return findings only for real issues. If nothing is wrong, return an empty list.

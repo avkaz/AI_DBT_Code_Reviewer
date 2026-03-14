@@ -1,0 +1,9 @@
+# Python cache
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+
+# Virtual environments
+.venv/
+# Environment variables / secrets
+.env

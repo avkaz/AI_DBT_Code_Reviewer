@@ -1,0 +1,7 @@
+diff --git a/tests/sql/suspicious_join.sql b/tests/sql/suspicious_join.sql
+index 111..222 100644
+--- a/tests/sql/suspicious_join.sql
++++ b/tests/sql/suspicious_join.sql
+@@ -10,6 +10,10 @@
+ JOIN events e
+     ON o.order_id = e.order_id
