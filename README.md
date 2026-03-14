@@ -65,3 +65,8 @@ python main.py tests/diffs/diff_suspicious.txt
 - better config for `loguru` and verbosity.
 - add retries/throttling around OpenAI API calls.
 - add more LLM check rules and external rule sets.
+- add LLM tocken tracking and response monitoring
+
+## Images
+![alt text](/images_for_readme/image-1.png)
+![alt text](/images_for_readme/image.png)
