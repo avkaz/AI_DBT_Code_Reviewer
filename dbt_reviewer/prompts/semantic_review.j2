@@ -11,17 +11,14 @@ Apply rules based on model type:
 {% endif %}
 
 Focus ONLY on issues static analysis cannot catch:
-- wrong or ambiguous aggregation grain
-- joins that may cause row duplication (fan-out)
-- missing GROUP BY given the selected columns
-- business logic that contradicts the model type above
-- column naming that is misleading or unclear
+{% for check in checks %}
+- {{ check }}
+{% endfor %}
 
 Do NOT report on:
-- SELECT * (already checked)
-- hardcoded schema references (already checked)
-- number of joins (already checked)
-- hardcoded dates (already checked)
+{% for skip in skip_checks %}
+- {{ skip }}
+{% endfor %}
 
 SQL:
 {{ sql }}
