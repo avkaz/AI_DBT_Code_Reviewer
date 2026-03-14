@@ -69,5 +69,5 @@ python main.py tests/diffs/diff_suspicious.txt
 - add LLM tocken tracking and response monitoring
 
 ## Images
-![alt text](image-1.png)
-![alt text](image.png)
+![alt text](/images_for_readme/image-1.png)
+![alt text](/images_for_readme/image.png)
