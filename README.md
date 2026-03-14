@@ -68,6 +68,3 @@ python main.py tests/diffs/diff_suspicious.txt
 - add more LLM check rules and external rule sets.
 
 ## Images
-
-- [ ] Add architecture diagram here (e.g., diff -> parser -> checks -> LLM -> report).
-- [ ] Add sample output screenshot here.
