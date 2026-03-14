@@ -8,6 +8,7 @@ from jinja2 import Environment, FileSystemLoader
 from openai import OpenAI, OpenAIError
 from pydantic import ValidationError
 
+from dbt_reviewer.llm_check_config import LLM_CHECKS, LLM_SKIP_CHECKS
 from dbt_reviewer.models import Finding, FindingsResponse, Source
 
 load_dotenv()
@@ -21,14 +22,22 @@ _jinja_env = Environment(loader=FileSystemLoader(PROMPTS_DIR), autoescape=True)
 SYSTEM_PROMPT = (PROMPTS_DIR / "system.txt").read_text().strip()
 
 
+def _build_user_prompt(sql: str, context: Optional[dict] = None) -> str:
+    template = _jinja_env.get_template("semantic_review.j2")
+    return template.render(
+        sql=sql,
+        context=context,
+        checks=LLM_CHECKS,
+        skip_checks=LLM_SKIP_CHECKS,
+    )
+
+
 def semantic_review(
     sql: str,
     file: str,
     context: Optional[dict] = None,
 ) -> list[Finding]:
-    prompt = _jinja_env.get_template("semantic_review.j2").render(
-        sql=sql, context=context
-    )
+    prompt = _build_user_prompt(sql, context)
 
     try:
         response = client.beta.chat.completions.parse(

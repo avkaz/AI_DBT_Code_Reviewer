@@ -39,8 +39,8 @@ def run_review(diff_text: str):
                 )
             )
             continue
-
+        context = _infer_context(file)
         findings += run_all_checks(sql, file)
-        findings += semantic_review(sql, file)
+        findings += semantic_review(sql, file, context=context)
 
     return findings
