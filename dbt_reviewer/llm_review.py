@@ -1,10 +1,10 @@
-import logging
 import os
 from pathlib import Path
 from typing import Optional
 
 from dotenv import load_dotenv
 from jinja2 import Environment, FileSystemLoader
+from loguru import logger
 from openai import OpenAI, OpenAIError
 from pydantic import ValidationError
 
@@ -13,7 +13,6 @@ from dbt_reviewer.models import Finding, FindingsResponse, Source
 
 load_dotenv()
 
-logger = logging.getLogger(__name__)
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 PROMPTS_DIR = Path(__file__).parent / "prompts"
@@ -38,6 +37,7 @@ def semantic_review(
     context: Optional[dict] = None,
 ) -> list[Finding]:
     prompt = _build_user_prompt(sql, context)
+    logger.info(f"Model context for {file}: {context}")
 
     try:
         response = client.beta.chat.completions.parse(
